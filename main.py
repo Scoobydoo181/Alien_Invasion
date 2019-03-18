@@ -14,9 +14,10 @@ def run_game():
 
     while True:
         
+        screen.fill(gs.bg_color)
         ship.blitme()
         gf.check_events(ship)
         ship.update()
-        gf.reload_screen(screen,gs)
+        pygame.display.update()
 
 run_game()

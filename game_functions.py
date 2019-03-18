@@ -15,7 +15,3 @@ def check_events(ship):
                                 ship.moving_right = False
                         elif event.key == pygame.K_LEFT:
                                 ship.moving_left = False
-
-def reload_screen(screen,game_settings):
-        screen.fill(game_settings.bg_color)
-        pygame.display.update()
