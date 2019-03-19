@@ -27,16 +27,22 @@ class Ship():
     def blitme(self):
         """Draw ship"""
         self.screen.blit(self.image, self.rect)
-
+    
     def move_ship(self):
         """Change the ship's position, stopping the ship if it hits a wall"""
         if self.moving_right:
             if self.rect.right < self.screen.get_rect().right:
                 self.rect.centerx += round(self.settings.ship_speed)
 
+            if self.rect.right == self.screen.get_rect().right:
+                self.rect.centerx = self.screen.get_rect().left
+
         if self.moving_left:
             if self.rect.left > self.screen.get_rect().left:
                 self.rect.centerx -= round(self.settings.ship_speed)
+
+            if self.rect.left == self.screen.get_rect().left:
+                self.rect.centerx = self.screen.get_rect().right
 
         max_height = int(self.settings.screen_height*(2/3))
         if self.moving_up:
