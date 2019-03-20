@@ -1,3 +1,8 @@
+import os
+
+import pygame
+
+
 class Settings():
     """A class to store game settings"""
 
@@ -8,3 +13,9 @@ class Settings():
         self.bg_color = (230, 230, 230)
         self.ship_speed = 1.6
 
+        path = os.path.dirname(__file__)
+        path = os.path.join(path, 'images', 'alien.bmp')
+        image = pygame.image.load(path)
+
+        self.alien_width = image.get_rect().width
+        self.alien_height = image.get_rect().height

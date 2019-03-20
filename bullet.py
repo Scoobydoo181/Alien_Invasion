@@ -1,11 +1,6 @@
-from enum import Enum
-
 import pygame
 from pygame.sprite import Sprite
 
-class BulletTypes(Enum):
-     Ship = 1
-     Alien = 2
 
 class Bullet(Sprite):
      """A bullet object that can kill aliens or the ship"""
@@ -17,8 +12,10 @@ class Bullet(Sprite):
           self.width = 3
           self.height = 15
           self.color = (60, 60, 60)
-          self.speed = 1.1
+          self.speed = 1.4
           self.screen = self.ship.screen
+
+          #Create the bullet emerging from the ship
           self.rect = pygame.Rect(ship.rect.left, ship.rect.top, self.width, self.height)
 
      def move_bullet(self):

@@ -1,13 +1,14 @@
 import os
 
 import pygame
+from pygame.sprite import Sprite
 
-
-class Ship():
+class Ship(Sprite):
     """Implement the player's ship"""
 
     def __init__(self, screen, settings):
         """Construct a ship at the bottom center of the screen"""
+        super().__init__()
         ship_path = os.path.dirname(__file__)
         ship_path = os.path.join(ship_path, 'images', 'ship.bmp')
 
@@ -16,9 +17,11 @@ class Ship():
         self.screen = screen
         self.settings = settings
 
+        #Sets position to bottom center
         self.rect.centerx = self.screen.get_rect().centerx
         self.rect.bottom = self.screen.get_rect().bottom
-
+        
+        #Movement flags for update loop
         self.moving_right = False
         self.moving_left = False
         self.moving_up = False
@@ -33,14 +36,14 @@ class Ship():
         if self.moving_right:
             if self.rect.right < self.screen.get_rect().right:
                 self.rect.centerx += round(self.settings.ship_speed)
-
+            #Allow the ship to leave one edge and enter the other
             if self.rect.right == self.screen.get_rect().right:
                 self.rect.centerx = self.screen.get_rect().left
 
         if self.moving_left:
             if self.rect.left > self.screen.get_rect().left:
                 self.rect.centerx -= round(self.settings.ship_speed)
-
+            #Allow the ship to leave one edge and enter the other
             if self.rect.left == self.screen.get_rect().left:
                 self.rect.centerx = self.screen.get_rect().right
 
