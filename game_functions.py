@@ -14,22 +14,19 @@ def update_screen(screen, settings, ship, bullet_group, alien_group):
         screen.fill(settings.bg_color)
 
         #Update and redraw the ship
-        ship.move_ship()
-        ship.blitme()
+        ship.update()
+        
 
         #Update and redraw bullets
-        for bullet in bullet_group:
-                bullet.move_bullet()
-                bullet.blitme()
-        remove_bullets(bullet_group)
+        bullet_group.update()
+        remove_offscreen_bullets(bullet_group)
         
         #Update and redraw aliens
-        for alien in alien_group:
-                alien.blitme()
-
+        alien_group.update()
+        
         #Remove dead aliens and bullets
         hit_bullet_group = Group()
-        for alien in alien_group.copy():
+        for alien in alien_group:
                hit_bullet_group.add(spritecollide(alien, bullet_group, True))
         for bullet in hit_bullet_group:
                 spritecollide(bullet, alien_group, True)
@@ -38,7 +35,7 @@ def update_screen(screen, settings, ship, bullet_group, alien_group):
         #Redraw whole screen
         pygame.display.flip()
 
-def remove_bullets(bullet_group):
+def remove_offscreen_bullets(bullet_group):
         """Remove bullets that exit the screen"""
         for bullet in bullet_group.copy():
                 if bullet.rect.centery <= 0:
@@ -84,11 +81,10 @@ def check_keyup_event(event, ship):
                         ship.moving_down = False
 
 def create_fleet(alien_list, screen, game_settings):
-        """Fills one row up with aliens"""
-        #Calculate how many aliens can fit on the screen
-        available_space = game_settings.screen_width - 2*game_settings.alien_width
-        num_aliens = int(available_space /2 )
-
+        """Fills the screen up with aliens"""
+        num_aliens = 10
+        
         #Add the aliens to the group
-        for num in range(num_aliens):
-                alien_list.add(Alien(screen, num))
+        for row in range(4):
+                for num in range(num_aliens):
+                        alien_list.add(Alien(screen, game_settings, num, row))
