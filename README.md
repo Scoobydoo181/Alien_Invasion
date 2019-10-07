@@ -11,4 +11,4 @@ WASD/Arrow Keys to move
 SPACE to shoot
 
 Rules:
-Don't let aliens touch your ship or the bottom of the map. If they do, you lose a life. 3 lifes and the game ends.
+Don't let aliens touch your ship or the bottom of the map. If they do, you lose a life. 3 lives and the game ends.
